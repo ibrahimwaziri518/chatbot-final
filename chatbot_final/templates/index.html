@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyline University Chatbot</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+    <h2>🎓 Skyline</h2>
+    <p>University Kano</p>
+    <hr>
+    <ul>
+        <li>🏠 Home</li>
+        <li>💬 Chatbot</li>
+        <li>📘 Courses</li>
+        <li>📌 Admission</li>
+        <li>📞 Contact</li>
+    </ul>
+</div>
+
+<div class="main">
+
+<div class="header">
+    <h1>Skyline University AI Chatbot</h1>
+    <p>Your Smart Virtual Assistant</p>
+</div>
+
+<div id="chatlogs"></div>
+
+<div class="input-area">
+    <input type="text" id="userInput" placeholder="Type message here...">
+    <button onclick="sendMsg()">Send</button>
+</div>
+
+</div>
+</div>
+
+<script>
+function sendMsg() {
+    let input = document.getElementById("userInput").value;
+    let chat = document.getElementById("chatlogs");
+
+    if(input.trim() == "") return;
+
+    chat.innerHTML += "<div class='user'>You: " + input + "</div>";
+
+    fetch("/get?msg=" + input)
+    .then(response => response.text())
+    .then(data => {
+        chat.innerHTML += "<div class='bot'>Bot: " + data + "</div>";
+        chat.scrollTop = chat.scrollHeight;
+    });
+
+    document.getElementById("userInput").value = "";
+}
+</script>
+
+</body>
+</html>
