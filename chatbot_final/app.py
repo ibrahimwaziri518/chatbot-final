@@ -7,8 +7,7 @@ def chatbot_reply(msg):
 
     # Greetings
     if any(word in user for word in ["hello", "hi", "hey"]):
-        return "Hello! Welcome to Skyline University Chatbot. How may I 
-assist you today?"
+        return "Hello! Welcome to Skyline University Chatbot. How may I assist you today?"
 
     # About Skyline
     elif any(word in user for word in ["about skyline", "tell me about 
