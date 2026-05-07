@@ -88,6 +88,32 @@ document.getElementById("content").innerHTML =
 "Use the chatbot message box below to ask questions.";
 }
 </script>
+<div style="position:fixed; bottom:20px; right:20px; left:320px;">
+    <input type="text" id="userInput"
+    placeholder="Type message here..."
+    style="width:75%; padding:15px; border-radius:10px; border:none; font-size:18px;">
 
+    <button onclick="sendMessage()"
+    style="padding:15px 25px; background:orange; color:white; border:none; border-radius:10px; font-size:18px;">
+    Send
+    </button>
+
+    <div id="chatResponse"
+    style="background:white; color:black; margin-top:15px; padding:15px; border-radius:10px;">
+    </div>
+</div>
+
+<script>
+function sendMessage(){
+    let userText = document.getElementById("userInput").value;
+
+    fetch("/get?msg=" + userText)
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("chatResponse").innerHTML =
+        "<b>You:</b> " + userText + "<br><br><b>Bot:</b> " + data;
+    });
+}
+</script>
 </body>
 </html>
